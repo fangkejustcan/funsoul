@@ -432,7 +432,7 @@ function draw() {
 
   /////////////////////////////////////// TEXT //////////////////////////////////////////////////////
   noStroke();
-  let line = 1;
+  let lineNum = 1;
   let pageStart, pageEnd; // 当前显示页的开始message序号和结束message序号
   pageStart = pageStartList[currentPage];
   if (currentPage === pageStartList.length - 1)
@@ -454,9 +454,9 @@ function draw() {
     let fontSize = 14;
     textSize(fontSize);
     textWrap(CHAR);
-    text(t, 20, fontSize * 1.2 * line, canvasWidth / 3);
-    line += 1 + (fontSize * t.length) / (canvasWidth / 3); // 段落换行增加的行数
-    if (fontSize * 1.2 * line > canvasHeight - 130) {
+    text(t, 20, fontSize * 1.2 * lineNum, canvasWidth / 3);
+    lineNum += 1 + (fontSize * t.length) / (canvasWidth / 3); // 段落换行增加的行数
+    if (fontSize * 1.2 * lineNum > canvasHeight - 130) {
       // start new page
       pageStartList.push(i); //将当前message index作为翻页序号存入翻页序号数组pageStartList
       currentPage++;
