@@ -214,21 +214,6 @@ function setup() {
   intentions.id = (i) => i;
   intentions.amount = BDIStates.length;
 
-  links = new Group();
-  links.overlaps(allSprites);
-
-  links.color = "grey";
-  links.strokeWeight = 0.5;
-  links.layer = 1;
-  for (let i = 0; i < intentions.length; i++) {
-    for (let j of BDIStates[i].nextStates) {
-      let link = new links.Sprite([
-        [intentions[i].x, intentions[i].y],
-        [intentions[j].x, intentions[j].y],
-      ]);
-    }
-  } // establish links
-
   objects = new Group();
   objects.x = () => random(canvasWidth / 3, canvasWidth);
   objects.y = () => random(canvasHeight / 5, canvasHeight - 200);
@@ -274,6 +259,22 @@ function setup() {
       },
     },
   ];
+
+  // Create links after all other sprites are initialized
+  links = new Group();
+  links.color = "grey";
+  links.strokeWeight = 0.5;
+  links.layer = 1;
+
+  for (let i = 0; i < intentions.length; i++) {
+    for (let j of BDIStates[i].nextStates) {
+      let link = new links.Sprite([
+        [intentions[i].x, intentions[i].y],
+        [intentions[j].x, intentions[j].y],
+      ]);
+      link.overlaps(allSprites); // Make links overlap with all sprites (no collision)
+    }
+  } // establish links
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////
 
